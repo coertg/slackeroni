@@ -8,8 +8,8 @@ class Controller @Inject()(
   authAction: auth.Action
 ) extends AbstractController(cc) {
 
-  def index = authAction {
-    Ok(html.view())
+  def index = authAction { request =>
+    Ok(s"howdy \uD83E\uDD20, ${request.user.displayName}")
   }
 
 }

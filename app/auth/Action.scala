@@ -3,6 +3,8 @@ package auth
 import javax.inject.Inject
 import play.api.mvc.Results.{Redirect, Unauthorized}
 import play.api.mvc._
+import user.User
+
 import scala.concurrent.{ExecutionContext, Future}
 
 class Action @Inject()(
@@ -16,8 +18,15 @@ class Action @Inject()(
   override def parser: BodyParser[AnyContent] = bp
 
   override protected def refine[A](request: Request[A]): Future[Either[Result, UserRequest[A]]] = Future.successful{
-    // TODO: Make auth work
-    Left(onAuthFail(request))
+    val possibleSessionValue: Option[String] = request.session.get(auth.sessionKey)
+    val possibleUnexpiredSession: Option[SessionToken] = possibleSessionValue.flatMap(auth.parseUnexpiredSession)
+    val possibleUser: Option[User] = possibleUnexpiredSession.flatMap(s => users.findBySessionKey(s.username))
+    val possibleUserRequest: Option[UserRequest[A]] = possibleUser.map(new UserRequest(_, request))
+
+    possibleUserRequest match {
+      case Some(ur) => Right(ur)
+      case _ => Left(onAuthFail(request))
+    }
   }
 
   override protected def executionContext: ExecutionContext = ec
