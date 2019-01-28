@@ -67,3 +67,4 @@ Our authentication check in `auth/Action.scala` currently fails by default.
 3. Look up the user in the DB using `user.Service`
 4. Construct a new `auth.UserRequest` using the user found in the previous step.
 5. If any of the above failed, return an Unauthorized response, otherwise, return the UserRequest
+6. Make use of an auth action to display the logged in user's display name
