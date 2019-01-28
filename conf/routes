@@ -1,0 +1,12 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /                                                                   application.Controller.index
+GET     /login                                                              auth.Controller.login
+POST    /login                                                              auth.Controller.authenticate
+POST    /logout                                                             auth.Controller.logout
+
+# Static Resources
+GET     /assets/*file                                                       controllers.Assets.at(path="/public", file)
+

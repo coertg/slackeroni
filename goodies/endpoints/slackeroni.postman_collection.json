@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "dc187c71-3166-4ead-9bd7-ae4046adb46c",
+		"name": "slackeroni",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"myemail@qaz.com\",\n\t\"password\": \"qwqwqw\",\n\t\"displayName\": \"whoopee\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

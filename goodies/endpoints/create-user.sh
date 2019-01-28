@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+curl -v -s -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{ "username": "qaz@domain.com", "password": "qwopqw", "displayName": "joe"}' "localhost:9000/api/users"

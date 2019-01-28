@@ -1,0 +1,8 @@
+CREATE SCHEMA IF NOT EXISTS slackeroni AUTHORIZATION postgres;
+
+CREATE TABLE IF NOT EXISTS slackeroni.users (
+	id SERIAL PRIMARY KEY,
+	username TEXT NOT NULL UNIQUE,
+	passhash TEXT NOT NULL,
+	display_name TEXT NOT NULL UNIQUE
+);
