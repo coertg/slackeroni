@@ -7,6 +7,8 @@ GET     /login                                                              auth
 POST    /login                                                              auth.Controller.authenticate
 POST    /logout                                                             auth.Controller.logout
 
+POST    /api/users    user.Controller.create
+
 # Static Resources
 GET     /assets/*file                                                       controllers.Assets.at(path="/public", file)
 

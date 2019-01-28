@@ -4,7 +4,7 @@ import java.security.MessageDigest
 import java.sql.SQLException
 
 import anorm.Macro.namedParser
-import anorm.SqlStringInterpolation
+import anorm.{SqlParser, SqlStringInterpolation}
 import javax.inject.Inject
 import play.api.db.DBApi
 
@@ -44,8 +44,36 @@ class Repository @Inject()(
   }
 
   private[user] def create(username: String, password: String, displayName: String): Either[Error, User] = {
-    // TODO: User creation
-    ???
+    try {
+      db.withConnection { implicit c =>
+        val passhash = md5(password)
+        val newId =
+          SQL"""
+          INSERT INTO
+            slackeroni.users (
+              username,
+              passhash,
+              display_name
+            )
+            VALUES (
+              $username,
+              $passhash,
+              $displayName
+            );
+        """.executeInsert(SqlParser.scalar[Long].single)
+
+        Right(
+          User(
+            newId,
+            username,
+            passhash,
+            displayName
+          )
+        )
+      }
+    } catch {
+      handleException
+    }
   }
 
   private[user] def authenticate(email: String, password: String): Option[User] = {
