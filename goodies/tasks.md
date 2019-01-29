@@ -1,9 +1,9 @@
-###First run
+### First run
 In order to run your application, `cd` into the application directory, and do `sbt run`. This will start the application on port 9000. To start the application on a different port (8080 for example), do `sbt "run 8080"`.
 
 You will probably encounter errors on your first run. We will be fixing those in the upcoming tasks.
 
-###Get DB up and running
+### Get DB up and running
 From your earlier SQL exploits:
 
 `docker run --name postgres -d -p 5432:5432 -e POSTGRES_PASSWORD=password postgres`
@@ -17,7 +17,7 @@ Starting your application with `sbt run` and then visiting `localhost:9000` shou
 By the end of this task, your application should display a very basic login screen.
 
 
-###User creation
+### User creation
 Before we can log in to our application, we need to create a user! Let's make an endpoint that creates a user:
 
 Endpoint: `POST /api/users`
@@ -58,7 +58,7 @@ On uniqueness constraint failure:
 
 By the end of this task, the endpoint can be tested with either `goodies/endpoints/create-user.sh` or `goodies/endpoints/create-user.postman`
 
-###Implement auth
+### Implement auth
 Our authentication check in `auth/Action.scala` currently fails by default.
 
 **Auth steps**
