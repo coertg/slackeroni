@@ -12,4 +12,6 @@ class Controller @Inject()(
     Ok(html.view())
   }
 
+  // TODO: add websockets
+
 }

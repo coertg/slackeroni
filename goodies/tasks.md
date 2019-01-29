@@ -46,15 +46,15 @@ On uniqueness constraint failure:
 409
 ```
 
-**Required File changes:**
+**Required file changes:**
 
-`user/Repository.scala`: Responsible for the DB operation. See `goodies/sql/create-user.sql` for query.
+ - `user/Repository.scala`: Responsible for the DB operation. See `goodies/sql/create-user.sql` for query.
 
-`user/Service.scala`: Responsible for dependency management. Will just expose the function implemented in the repository.
+ - `user/Service.scala`: Responsible for dependency management. Will just expose the function implemented in the repository.
 
-`user/Controller.scala`: Responsible for communication with the outside. Will receive and parse the request, and translate service output into a response.
+ - `user/Controller.scala`: Responsible for communication with the outside. Will receive and parse the request, and translate service output into a response.
 
-`conf/routes`: Defines the http verb, route and which controller function is called.
+ - `conf/routes`: Defines the http verb, route and which controller function is called.
 
 By the end of this task, the endpoint can be tested with either `goodies/endpoints/create-user.sh` or `goodies/endpoints/create-user.postman`
 
@@ -68,3 +68,18 @@ Our authentication check in `auth/Action.scala` currently fails by default.
 4. Construct a new `auth.UserRequest` using the user found in the previous step.
 5. If any of the above failed, return an Unauthorized response, otherwise, return the UserRequest
 6. Make use of an auth action to display the logged in user's display name
+
+### Websockets
+Time to start adding messaging. We will be using play's websocket implementation:
+
+[Play websocket documentation](https://www.playframework.com/documentation/2.6.x/ScalaWebSockets)
+
+**Required file changes**
+
+ - `application/Controller.scala`: here we will be defining the actual ws endpoint. Remember to also expose it in the routes file!
+
+ - `application/MessagingActor.scala`: this new file will be defining the actor handling the incoming messages. As a starting point, our actor will just be echoing messages back to the user.
+
+We can test our websockets [here](http://www.websocket.org/echo.html).
+
+Once you've got it working, give the actor the ability to play marco polo :-)
