@@ -69,6 +69,11 @@ Our authentication check in `auth/Action.scala` currently fails by default.
 5. If any of the above failed, return an Unauthorized response, otherwise, return the UserRequest
 6. Make use of an auth action to display the logged in user's display name
 
+By the end of this task, you should be able to log in with the user you created earlier.
+
+Once you've logged in, you can use the user info attached to the `authAction` to display the logged in user details.
+Go to `application/Controller.scala` and try this in the `index` function. 
+
 ### Websockets
 Time to start adding messaging. We will be using play's websocket implementation:
 
